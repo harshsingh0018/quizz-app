@@ -1,0 +1,201 @@
+:root{
+  --bg0:#070A12;
+  --bg1:#0B1630;
+  --card:rgba(255,255,255,.08);
+  --card2:rgba(255,255,255,.12);
+  --text:#EAF0FF;
+  --muted:rgba(234,240,255,.72);
+  --primary:#6D5EF7;
+  --primary2:#22D3EE;
+  --good:#22C55E;
+  --bad:#EF4444;
+  --ring:rgba(109,94,247,.35);
+  --shadow: 0 16px 50px rgba(0,0,0,.45);
+  --radius:18px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  -webkit-user-select:none;
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background:
+    radial-gradient(1200px 600px at 15% 10%, rgba(34,211,238,.25), transparent 55%),
+    radial-gradient(900px 500px at 85% 20%, rgba(109,94,247,.28), transparent 50%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+.app{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:24px 16px;
+  gap:18px;
+}
+
+.app__header{ text-align:center; max-width:720px; }
+.app__title{ margin:0; font-size:clamp(26px, 3.6vw, 40px); letter-spacing:.3px; }
+.app__subtitle{ margin:.5rem 0 0; color:var(--muted); }
+
+.card{
+  width:min(900px, 100%);
+  background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+  overflow:hidden;
+  position:relative;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: radial-gradient(500px 220px at 20% 0%, rgba(34,211,238,.2), transparent 60%),
+              radial-gradient(450px 220px at 85% 20%, rgba(109,94,247,.25), transparent 55%);
+  pointer-events:none;
+}
+.card > *{ position:relative; }
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  margin-bottom:10px;
+}
+.badge{
+  font-size:14px;
+  color:var(--muted);
+  padding:8px 12px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+}
+.score-mini{ color:var(--muted); font-size:14px; }
+
+.question{
+  margin:10px 0 14px;
+  font-size:clamp(18px, 2.3vw, 24px);
+  line-height:1.25;
+}
+
+.options{
+  display:grid;
+  gap:10px;
+}
+
+.option{
+  text-align:left;
+  border-radius:14px;
+  padding:14px 14px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  cursor:pointer;
+  transition: transform .12s ease, background .15s ease, border-color .15s ease;
+  user-select:none;
+}
+.option:hover{ transform: translateY(-1px); background:rgba(255,255,255,.09); }
+.option:focus{ outline:none; box-shadow: 0 0 0 4px var(--ring); }
+.option[aria-checked="true"]{
+  border-color:rgba(109,94,247,.65);
+  background:rgba(109,94,247,.18);
+}
+
+.option__row{display:flex; gap:12px; align-items:flex-start}
+.option__letter{
+  width:30px; height:30px; border-radius:10px;
+  display:grid; place-items:center;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  flex:0 0 auto;
+  font-weight:700;
+}
+.option__text{ color:var(--text); line-height:1.35; }
+
+.option--correct{ border-color:rgba(34,197,94,.8) !important; background:rgba(34,197,94,.14) !important; }
+.option--wrong{ border-color:rgba(239,68,68,.8) !important; background:rgba(239,68,68,.14) !important; }
+
+.controls{ display:flex; justify-content:flex-end; margin-top:14px; }
+.controls--stack{ justify-content:center; }
+
+.btn{
+  border:0;
+  border-radius:14px;
+  padding:12px 16px;
+  font-weight:700;
+  cursor:pointer;
+  transition: transform .12s ease, filter .15s ease;
+}
+.btn:active{ transform: translateY(1px); }
+.btn:focus{ outline:none; box-shadow: 0 0 0 4px var(--ring); }
+
+.btn--primary{
+  color:white;
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  box-shadow: 0 14px 30px rgba(109,94,247,.22);
+}
+
+.hint{
+  margin:12px 0 0;
+  min-height:22px;
+  color:var(--muted);
+}
+
+.view{
+  animation: popIn .28s ease both;
+}
+@keyframes popIn{
+  from{ opacity:0; transform: translateY(8px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+.view[hidden]{ display:none; }
+
+.result{
+  padding:10px 6px;
+  text-align:center;
+}
+.result__title{ margin:6px 0 8px; font-size:clamp(22px, 2.8vw, 30px); }
+.result__score{ font-size:20px; color:var(--muted); }
+.result__summary{ margin:10px 0 16px; color:var(--muted); }
+
+.result__meta{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+.meta-row{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:12px 10px;
+}
+.meta-row span{ display:block; color:var(--muted); font-size:13px; }
+.meta-row strong{ display:block; margin-top:6px; font-size:18px; }
+
+.app__footer{
+  color:rgba(234,240,255,.55);
+  font-size:13px;
+  text-align:center;
+}
+
+@media (max-width: 520px){
+  .card{ padding:14px; }
+  .topbar{ flex-direction:column; align-items:flex-start; }
+  .controls{ justify-content:center; }
+  .result__meta{ grid-template-columns:1fr; }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .view{ animation:none; }
+  .option, .btn{ transition:none; }
+}
+
