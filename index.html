@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app" aria-label="Quiz application">
+    <header class="app__header">
+      <h1 class="app__title">Quiz App</h1>
+      <p class="app__subtitle">Test your knowledge with interactive questions.</p>
+    </header>
+
+    <section class="card" aria-live="polite">
+      <!-- Intro / Question view -->
+      <div id="view-quiz" class="view view--quiz">
+        <div class="topbar">
+          <div class="badge" id="progress-badge">Question 1 / 5</div>
+          <div class="score-mini" id="score-mini">Score: 0</div>
+        </div>
+
+        <h2 class="question" id="question">Question text</h2>
+
+        <div class="options" id="options" role="list">
+          <!-- options rendered here -->
+        </div>
+
+        <div class="controls">
+          <button class="btn btn--primary" id="nextBtn" type="button">
+            Next
+          </button>
+        </div>
+
+        <p class="hint" id="hint" aria-hidden="true"></p>
+      </div>
+
+      <!-- Result view -->
+      <div id="view-result" class="view view--result" hidden>
+        <div class="result">
+          <h2 class="result__title">Your Results</h2>
+          <div class="result__score" id="resultScore">0 / 0</div>
+          <p class="result__summary" id="resultSummary">Nice try!</p>
+
+          <div class="result__meta">
+            <div class="meta-row">
+              <span>Correct</span>
+              <strong id="correctCount">0</strong>
+            </div>
+            <div class="meta-row">
+              <span>Wrong</span>
+              <strong id="wrongCount">0</strong>
+            </div>
+            <div class="meta-row">
+              <span>Accuracy</span>
+              <strong id="accuracy">0%</strong>
+            </div>
+          </div>
+
+          <div class="controls controls--stack">
+            <button class="btn btn--primary" id="restartBtn" type="button">
+              Restart Quiz
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app__footer">
+      <span>Built with HTML • CSS • JavaScript DOM</span>
+    </footer>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
+
